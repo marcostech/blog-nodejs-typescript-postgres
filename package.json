@@ -1,0 +1,28 @@
+{
+  "name": "estudos-nodjs-prisma-postgres",
+  "version": "1.0.0",
+  "description": "Hello",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcostech/estudos-nodjs-prisma-postgres.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcostech/estudos-nodjs-prisma-postgres/issues"
+  },
+  "homepage": "https://github.com/marcostech/estudos-nodjs-prisma-postgres#readme",
+  "dependencies": {
+    "@prisma/client": "^4.7.1",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "prisma": "^4.7.1",
+    "sucrase": "^3.29.0",
+    "yarn": "^1.22.19"
+  }
+}
