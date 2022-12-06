@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -6,7 +6,7 @@ export default {
     async createUser(req, res) {
         try {
             const { name, email } = req.body;
-            let user = await prisma.user.findUnique({ where: { email } });
+            let user: User | null = await prisma.user.findUnique({ where: { email } });
             if (user) {
                 return res.json({ error: "Email já em uso por um um usuário." })
             }
@@ -34,9 +34,13 @@ export default {
     async findUser(req, res) {
         const { id } = req.params;
         try {
-            const user = await prisma.user.findUnique({ where: { id: Number(id) } });
+            const user: User | null = await prisma.user.findUnique({
+                where: {
+                    id: Number(id)
+                }
+            });
             if (!user) {
-                return res.json({ message: "Usuário não encontrado." });
+                return res.json({ message: "Usuário não encontrado. ${user}"});
             }
             return res.json(user);
         } catch (error) {
@@ -48,7 +52,7 @@ export default {
         const { id } = req.params;
         const { name, email } = req.body;
         try {
-            let user = await prisma.user.findUnique({ where: { id: Number(id) } });
+            let user: User | null = await prisma.user.findUnique({ where: { id: Number(id) } });
             if (!user) {
                 return res.json({ message: "Usuário não encontrado." });
             }
@@ -65,7 +69,7 @@ export default {
     async deleteUser(req, res) {
         const { id } = req.params;
         try {
-            const user = await prisma.user.findUnique({ where: { id: Number(id) } });
+            const user: User | null = await prisma.user.findUnique({ where: { id: Number(id) } });
             if (!user) {
                 return res.json({ message: "Usuário não encontrado." });
             }
