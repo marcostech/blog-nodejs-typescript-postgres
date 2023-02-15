@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User, Post } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -7,7 +7,7 @@ export default {
         const { content } = req.body;
         const { id } = req.params;
         try {
-            const user = await prisma.user.findUnique({ where: { id: Number(id) } });
+            const user: User | null = await prisma.user.findUnique({ where: { id: Number(id) } });
             if (!user) {
                 return res.json({ message: "Não foi possivel criar post, usuário inexistente." })
             }
@@ -35,12 +35,39 @@ export default {
         }
     },
 
+    async findPost(req, res) {
+        const { id } = req.params;
+        const { content } = req.body;
+
+        try {
+            const post = await prisma.post.findUnique({
+                where: {
+                    id: Number(id)
+                },
+                select: {
+                    content: true,
+                    author: {
+                        select: {
+                            name: true,
+                        }
+                    }
+                }
+            });
+            if (!post) {
+                return res.json({ message: "Post não encontrado." });
+            }
+            return res.json(post);
+        } catch (error) {
+            return res.json(error);
+        }
+    },
+
     async updatePost(req, res) {
         const { id } = req.params;
         const { content } = req.body;
 
         try {
-            const post = await prisma.post.findUnique({ where: { id: Number(id) } });
+            const post: Post | null = await prisma.post.findUnique({ where: { id: Number(id) } });
             if (!post) {
                 return res.json({ message: "Post não encontrado." });
             }
@@ -58,7 +85,7 @@ export default {
     async deletePost(req, res) {
         const { id } = req.params;
         try {
-            const post = await prisma.post.findUnique({ where: { id: Number(id) } });
+            const post: Post | null = await prisma.post.findUnique({ where: { id: Number(id) } });
             if (!post) {
                 return res.json({ message: "Post não encontrado." })
             }
