@@ -1,18 +1,19 @@
 import { Router } from 'express';
-import UsersControllers from './controllers/UsersControllers';
+import { userController } from "../src/infrastructure/http/composers/UserComposer"
+
 import PostControllers from './controllers/PostControllers';
 
 const router = Router();
 //User router
-router.get("/users", UsersControllers.findAllUsers);
+router.get("/users", userController.findAll());
 
-router.get("/user/:id", UsersControllers.findUser);
+router.get("/user/:id", userController.findOne());
 
-router.post("/user", UsersControllers.createUser);
+router.post("/user", userController.create());
 
-router.put("/user/:id", UsersControllers.updateUser);
+router.put("/user/:id", userController.update());
 
-router.delete("/user/:id", UsersControllers.deleteUser);
+router.delete("/user/:id", userController.delete());
 
 //Post router
 router.post("/post/user/:id", PostControllers.createPost);

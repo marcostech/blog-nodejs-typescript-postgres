@@ -20,7 +20,7 @@ export class UserUseCase implements IUserUseCase {
         if(post) return post
         throw new Error("Invalid User creation request!");
     }
-    async update(data: number): Promise<any> {
+    async update(data: any): Promise<any> {
         const post = await this.userRepository.update(data)
         if(post) return post
         throw new Error("Invalid User update request!");
