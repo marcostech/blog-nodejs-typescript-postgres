@@ -20,7 +20,7 @@
 * Linguagem de programação: TypeScript
 * Banco de dados: Postgres
 * ORM: Prisma
-* Testes unitários: JEST
+* Testes unitários: JEST **WIP
 * Escrito seguindo padrões Clean
   
 ## Características
