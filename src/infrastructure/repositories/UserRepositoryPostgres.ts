@@ -14,9 +14,15 @@ export class UserRepositoryPostgres implements IUserRepository {
             }
         })
         if (user) return user
-        throw new Error("DB error.");
+        return null
     }
     async create(data: any): Promise<any> {
+        const userEmail = await prisma.user.findUnique({
+            where: {
+                email: data.email
+            }
+        })
+        if(userEmail) throw new Error("Email already been used!")
         const user = await prisma.user.create({
             data: data
         })
@@ -24,6 +30,12 @@ export class UserRepositoryPostgres implements IUserRepository {
         throw new Error("DB error.");
     }
     async update(data: any): Promise<any> {
+        const userEmail = await prisma.user.findUnique({
+            where: {
+                email: data.email
+            }
+        })
+        if(userEmail) throw new Error("Email already been used!")
         const users = await prisma.user.update({
             where: {
                 id: data.id
@@ -33,14 +45,14 @@ export class UserRepositoryPostgres implements IUserRepository {
         if (users) return users
         throw new Error("DB error.");
     }
-    async delete(id: number): Promise<any> {
+    async delete(id: number): Promise<Boolean> {
         const user = await prisma.user.delete({
             where: {
                 id
             }
         })
-        if (user) return user
-        throw new Error("DB error.");
+        if (user) return true
+        return false
     }
 
 }

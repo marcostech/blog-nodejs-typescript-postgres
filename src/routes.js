@@ -1,29 +1,28 @@
 import { Router } from 'express';
 import { userController } from "../src/infrastructure/http/composers/UserComposer"
-
-import PostControllers from './controllers/PostControllers';
+import { postController } from "../src/infrastructure/http/composers/PostComposer"
 
 const router = Router();
 //User router
-router.get("/users", userController.findAll());
+router.get("/users", async (req, res) => { userController.findAll(res) });
 
-router.get("/user/:id", userController.findOne());
+router.get("/user/find/:id", async (req, res) => { userController.findOne(req, res) });
 
-router.post("/user", userController.create());
+router.post("/user/create", async (req, res) => { userController.create(req, res) });
 
-router.put("/user/:id", userController.update());
+router.put("/user/update", async (req, res) => { userController.update(req, res) });
 
-router.delete("/user/:id", userController.delete());
+router.delete("/user/delete/:id", async (req, res) => { userController.delete(req, res) });
 
 //Post router
-router.post("/post/user/:id", PostControllers.createPost);
+router.get("/posts", async (req, res) => { postController.findAll(res) });
 
-router.get("/post/user/:id", PostControllers.findPost);
+router.get("/post/find/:id", async (req, res) => { postController.findOne(req, res) });
 
-router.get("/posts", PostControllers.findAllPosts);
+router.post("/post/create", async (req, res) => { postController.create(req, res) });
 
-router.put("/post/user/:id", PostControllers.updatePost);
+router.put("/post/update", async (req, res) => { postController.update(req, res) });
 
-router.delete("/post/user/:id", PostControllers.deletePost);
+router.delete("/post/delete/:id", async (req, res) => { postController.delete(req, res) });
 
 export { router };

@@ -3,5 +3,5 @@ export interface IUserRepository {
     findOne(id: number): Promise<any>
     create(data: any): Promise<any>
     update(data: any): Promise<any>
-    delete(id: number): Promise<any>
+    delete(id: number): Promise<Boolean>
 }

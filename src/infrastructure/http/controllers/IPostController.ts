@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-export interface IUserController{
+export interface IPostController{
     findAll(response: Response): Promise<any>
     findOne(request: Request, response: Response): Promise<any>
     create(request: Request, response: Response): Promise<any>

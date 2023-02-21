@@ -1,39 +1,39 @@
-import { IUserUseCase } from "../../../app/useCases/IUserUseCase";
-import { IUserController } from "./IUserController";
+import { IPostUseCase } from "../../../app/useCases/IPostUseCase";
+import { IPostController } from "./IPostController";
 import { Request, Response } from 'express'
 
-export class UserController implements IUserController {
+export class PostController implements IPostController {
     constructor(
-        private userUseCase: IUserUseCase
+        private postUseCase: IPostUseCase
     ) { }
     async findAll(response: Response): Promise<any> {
         try {
-            const users = await this.userUseCase.findAll()
-            return response.status(200).send(users)
+            const posts = await this.postUseCase.findAll()
+            return response.status(200).send(posts)
         } catch (error) {
             return response.status(400).json({ message: error.message })
         }
     }
     async findOne(request: Request, response: Response): Promise<any> {
         try {
-            const user = await this.userUseCase.findOne(parseInt(request.params.id))
-            return response.status(200).send(user)
+            const post = await this.postUseCase.findOne(parseInt(request.params.id))
+            return response.status(200).send(post)
         } catch (error) {
             return response.status(400).json({ message: error.message })
         }
     }
     async create(request: Request, response: Response): Promise<any> {
         try {
-            const user = await this.userUseCase.create(request.body)
-            return response.status(200).send(user)
+            const post = await this.postUseCase.create(request.body)
+            return response.status(200).send(post)
         } catch (error) {
             return response.status(400).json({ message: error.message })
         }
     }
     async update(request: Request, response: Response): Promise<any> {
         try {
-            const user = await this.userUseCase.update(request.body)
-            return response.status(200).send(user)
+            const post = await this.postUseCase.update(request.body)
+            return response.status(200).send(post)
         } catch (error) {
             return response.status(400).json({ message: error.message })
         }
@@ -41,8 +41,8 @@ export class UserController implements IUserController {
 
     async delete(request: Request, response: Response): Promise<any> {
         try {
-            const userDeleted = await this.userUseCase.delete(parseInt(request.params.id))
-            return response.status(200).send(userDeleted)
+            const postDeleted = await this.postUseCase.delete(parseInt(request.params.id))
+            return response.status(200).send(postDeleted)
         } catch (error) {
             return response.status(400).json({ message: error.message })
         }
