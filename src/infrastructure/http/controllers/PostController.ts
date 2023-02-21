@@ -10,7 +10,7 @@ export class PostController implements IPostController {
         try {
             const posts = await this.postUseCase.findAll()
             return response.status(200).send(posts)
-        } catch (error) {
+        } catch (error: any) {
             return response.status(400).json({ message: error.message })
         }
     }
@@ -18,7 +18,7 @@ export class PostController implements IPostController {
         try {
             const post = await this.postUseCase.findOne(parseInt(request.params.id))
             return response.status(200).send(post)
-        } catch (error) {
+        } catch (error: any) {
             return response.status(400).json({ message: error.message })
         }
     }
@@ -26,7 +26,7 @@ export class PostController implements IPostController {
         try {
             const post = await this.postUseCase.create(request.body)
             return response.status(200).send(post)
-        } catch (error) {
+        } catch (error: any) {
             return response.status(400).json({ message: error.message })
         }
     }
@@ -34,7 +34,7 @@ export class PostController implements IPostController {
         try {
             const post = await this.postUseCase.update(request.body)
             return response.status(200).send(post)
-        } catch (error) {
+        } catch (error: any) {
             return response.status(400).json({ message: error.message })
         }
     }
@@ -43,7 +43,7 @@ export class PostController implements IPostController {
         try {
             const postDeleted = await this.postUseCase.delete(parseInt(request.params.id))
             return response.status(200).send(postDeleted)
-        } catch (error) {
+        } catch (error: any) {
             return response.status(400).json({ message: error.message })
         }
     }

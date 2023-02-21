@@ -10,7 +10,9 @@ export class UserController implements IUserController {
         try {
             const users = await this.userUseCase.findAll()
             return response.status(200).send(users)
-        } catch (error) {
+        } catch (error: any) {
+            console.log(error);
+            
             return response.status(400).json({ message: error.message })
         }
     }
@@ -18,7 +20,7 @@ export class UserController implements IUserController {
         try {
             const user = await this.userUseCase.findOne(parseInt(request.params.id))
             return response.status(200).send(user)
-        } catch (error) {
+        } catch (error: any) {
             return response.status(400).json({ message: error.message })
         }
     }
@@ -26,7 +28,7 @@ export class UserController implements IUserController {
         try {
             const user = await this.userUseCase.create(request.body)
             return response.status(200).send(user)
-        } catch (error) {
+        } catch (error: any) {
             return response.status(400).json({ message: error.message })
         }
     }
@@ -34,7 +36,7 @@ export class UserController implements IUserController {
         try {
             const user = await this.userUseCase.update(request.body)
             return response.status(200).send(user)
-        } catch (error) {
+        } catch (error: any) {
             return response.status(400).json({ message: error.message })
         }
     }
@@ -43,7 +45,7 @@ export class UserController implements IUserController {
         try {
             const userDeleted = await this.userUseCase.delete(parseInt(request.params.id))
             return response.status(200).send(userDeleted)
-        } catch (error) {
+        } catch (error: any) {
             return response.status(400).json({ message: error.message })
         }
     }

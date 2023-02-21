@@ -1,5 +1,5 @@
 import { IUserRepository } from "../../app/repositories/IUserRepository";
-import { prisma } from "../../../prisma/prisma";
+import { prisma } from "../../../prisma/prisma"
 
 export class UserRepositoryPostgres implements IUserRepository {
     async findAll(): Promise<any> {

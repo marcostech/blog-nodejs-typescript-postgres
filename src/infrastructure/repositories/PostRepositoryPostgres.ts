@@ -1,5 +1,5 @@
 import { IPostRepository } from "../../app/repositories/IPostRepository";
-import { prisma } from "../../../prisma/prisma";
+import { prisma } from "../../../prisma/prisma"
 
 export class PostRepositoryPostgres implements IPostRepository {
     async findAll(): Promise<any> {
