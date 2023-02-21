@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { userController } from "../src/infrastructure/http/composers/UserComposer"
-import { postController } from "../src/infrastructure/http/composers/PostComposer"
+import { userController } from "./infrastructure/http/composers/UserComposer"
+import { postController } from "./infrastructure/http/composers/PostComposer"
 
 const router = Router();
 //User router
