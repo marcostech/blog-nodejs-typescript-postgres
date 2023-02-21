@@ -14,9 +14,6 @@
   <a href="#Como-Usar">Como usar</a> •
 </p>
 
-<p align="center" >
-    <img src="./resources/Screenshot_2.png" alt="Blog" width="400">
-</p>
 
 ## Tecnologias-utilizadas
 * Servidor Backend: NodeJS
